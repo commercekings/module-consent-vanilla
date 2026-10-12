@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Reject malformed cookie types and choices without a valid reference/time before granting consent.
+
 - Self-hosted Vanilla CookieConsent 3.1.0 adapter, cookie readers and generic English banner texts.
 - Prepare Composer metadata, Magento dependency bounds and source/distribution packaging for the first public release.
 - Adapt unit tests to PHPUnit 12 while retaining older data-provider annotations.

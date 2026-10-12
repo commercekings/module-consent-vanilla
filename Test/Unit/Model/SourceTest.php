@@ -22,7 +22,7 @@ class SourceTest extends TestCase
         'marketing' => ['label' => 'Marketing', 'sort_order' => 30, 'purposes' => ['cart_reminder' => 'cart_reminder']],
     ];
 
-    private function source(?string $cookie, string $revision = '1', ?array $formats = null): Source
+    private function source(mixed $cookie, string $revision = '1', ?array $formats = null): Source
     {
         $manager = $this->createMock(CookieManagerInterface::class);
         $manager->method('getCookie')->with('ck_cookie_consent')->willReturn($cookie);
@@ -67,7 +67,7 @@ class SourceTest extends TestCase
 
     /** @dataProvider noChoice */
     #[\PHPUnit\Framework\Attributes\DataProvider('noChoice')]
-    public function testNoTrustworthyChoice(?string $cookie, string $revision): void
+    public function testNoTrustworthyChoice(mixed $cookie, string $revision): void
     {
         $this->assertNull($this->source($cookie, $revision)->getChoice());
     }
@@ -76,6 +76,10 @@ class SourceTest extends TestCase
     {
         return [
             'no cookie' => [null, '1'],
+            'array cookie' => [['bad'], '1'],
+            'array reference' => [self::cookie(['consentId' => ['bad']]), '1'],
+            'array time' => [self::cookie(['lastConsentTimestamp' => ['bad']]), '1'],
+            'array revision' => [self::cookie(['revision' => [1]]), '1'],
             'broken cookie' => ['{broken', '1'],
             'v2 cookie, only the v3 reader registered' => ['{"level":["necessary","personalization"],"revision":0}', '1'],
             'saved for an older revision' => [self::cookie([]), '2'],

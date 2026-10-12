@@ -53,14 +53,20 @@ class Source implements SourceInterface
 
     public function getChoice(): ?SourceChoice
     {
-        $cookie = json_decode((string)$this->cookieManager->getCookie($this->config->getCookieName()), true);
+        $value = $this->cookieManager->getCookie($this->config->getCookieName());
+        $cookie = is_string($value) ? json_decode($value, true) : null;
         $format = is_array($cookie) ? $this->formatFor($cookie) : null;
         if (!$format || $format->revision($cookie) !== $this->config->getRevision()) {
             return null;
         }
+        $reference = $format->reference($cookie);
+        $time = $format->consentTime($cookie);
+        if ($reference === '' || $time === '') {
+            return null;
+        }
         return new SourceChoice(
-            $format->reference($cookie),
-            $format->consentTime($cookie),
+            $reference,
+            $time,
             $format->revision($cookie),
             $this->categoryMapper->acceptedPurposes($this->getCategories(), $format->acceptedCategories($cookie)),
             $format->expiresAt($cookie)
