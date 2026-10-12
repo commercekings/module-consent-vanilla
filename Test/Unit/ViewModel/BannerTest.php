@@ -25,14 +25,14 @@ class BannerTest extends TestCase
         string $privacy = 'https://shop.test/privacy',
         array $categories = self::CATEGORIES
     ): Banner {
-        $sourceConfig = $this->createMock(SourceConfigInterface::class);
+        $sourceConfig = $this->createStub(SourceConfigInterface::class);
         $sourceConfig->method('getSourceCode')->willReturn($chosen);
         $sourceConfig->method('getRevision')->willReturn('3');
         $sourceConfig->method('getCookieName')->willReturn('ck_cookie_consent');
         $sourceConfig->method('getCookieLifetimeDays')->willReturn(90);
-        $settings = $this->createMock(BannerSettingsInterface::class);
+        $settings = $this->createStub(BannerSettingsInterface::class);
         $settings->method('getPrivacyUrl')->willReturn($privacy);
-        $source = new Source($this->createMock(CookieManagerInterface::class), new CategoryMapper(new PurposePool([])), $sourceConfig, $categories);
+        $source = new Source($this->createStub(CookieManagerInterface::class), new CategoryMapper(new PurposePool([])), $sourceConfig, $categories);
         return new Banner($sourceConfig, $settings, $source);
     }
 

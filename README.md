@@ -1,5 +1,10 @@
 # CommerceKings_ConsentVanilla
 
+Install in a Magento project with `composer require commercekings/module-consent-vanilla:^0.1` after the first
+release is published. Enable the Magento module(s) listed below and run `bin/magento setup:upgrade`.
+For development/tests use source checkouts (`--prefer-source`); release archives omit `Test/`.
+
+
 [vanilla-cookieconsent](https://github.com/orestbida/cookieconsent) for Magento 2: a configurable **cookie banner**, the consent **source** for `CommerceKings_Consent`, and the library itself. Requires only `CommerceKings_Consent`. The adapter registers itself and ships generic English UI texts. A site module defines categories, descriptions and purpose mappings in its own `di.xml`, and translates the texts in `i18n/<locale>.csv`. The package ships no shop categories or feature mappings.
 
 ## The library (bundled)

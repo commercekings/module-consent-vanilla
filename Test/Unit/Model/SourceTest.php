@@ -27,7 +27,7 @@ class SourceTest extends TestCase
         $manager = $this->createMock(CookieManagerInterface::class);
         $manager->method('getCookie')->with('ck_cookie_consent')->willReturn($cookie);
         $purposes = new PurposePool(['cart_reminder' => ['label' => 'Cart reminder'], 'analytics_purpose' => ['label' => 'Analytics']]);
-        $config = $this->createMock(SourceConfigInterface::class);
+        $config = $this->createStub(SourceConfigInterface::class);
         $config->method('getRevision')->willReturn($revision);
         $config->method('getCookieName')->willReturn('ck_cookie_consent');
         return new Source($manager, new CategoryMapper($purposes), $config, self::CATEGORIES, $formats ?? ['v3' => new V3()]);
@@ -66,6 +66,7 @@ class SourceTest extends TestCase
     }
 
     /** @dataProvider noChoice */
+    #[\PHPUnit\Framework\Attributes\DataProvider('noChoice')]
     public function testNoTrustworthyChoice(?string $cookie, string $revision): void
     {
         $this->assertNull($this->source($cookie, $revision)->getChoice());
@@ -91,7 +92,7 @@ class SourceTest extends TestCase
 
     public function testTheNewestMatchingCookieFormatReadsTheCookie(): void
     {
-        $v4 = $this->createMock(CookieFormatInterface::class);
+        $v4 = $this->createStub(CookieFormatInterface::class);
         $v4->method('getVersion')->willReturn('4.0.0');
         $v4->method('matches')->willReturnCallback(fn (array $c) => isset($c['v4']));
         $v4->method('revision')->willReturn('1');
