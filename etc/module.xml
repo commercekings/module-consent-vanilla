@@ -4,6 +4,7 @@
     <module name="CommerceKings_ConsentVanilla">
         <sequence>
             <module name="CommerceKings_Consent"/>
+            <module name="CommerceKings_ConsentDefaults"/>
         </sequence>
     </module>
 </config>

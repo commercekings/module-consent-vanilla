@@ -11,7 +11,8 @@ use CommerceKings\Consent\Model\CategoryMapper;
 use Magento\Framework\Stdlib\CookieManagerInterface;
 
 /**
- * Consent source: a vanilla-cookieconsent banner. A site module supplies categories in di.xml, or CategoryMapper uses an optional preset;
+ * Consent source: a vanilla-cookieconsent banner. A site module supplies categories in di.xml,
+ * or CategoryMapper uses the required ConsentDefaults preset;
  * this module supplies cookie readers:
  *  (cookie name, revision and cookie lifetime are the shop's admin settings, Consent)
  *  - categories: key => [label, description, required, sort_order, purposes => [purpose codes this
