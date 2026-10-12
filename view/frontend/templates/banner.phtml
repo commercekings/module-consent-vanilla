@@ -1,0 +1,14 @@
+<?php
+/**
+ * The selected, configured banner's settings for CommerceKings_ConsentVanilla/js/banner.
+ * Feature permission checks remain in CommerceKings_Consent, including when no banner is rendered.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \CommerceKings\ConsentVanilla\ViewModel\Banner $viewModel
+ */
+$viewModel = $block->getData('view_model');
+?>
+<?php if ($viewModel->isEnabled()): ?>
+<script type="application/json" id="commercekings-consent-banner"><?= /* @noEscape */ $viewModel->getConfigJson() ?></script>
+<script type="text/x-magento-init">{"*": {"CommerceKings_ConsentVanilla/js/banner": {}}}</script>
+<?php endif; ?>

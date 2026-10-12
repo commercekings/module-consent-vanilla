@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- register this source in CommerceKings_Consent (admin: Source) -->
+    <type name="CommerceKings\Consent\Model\SourcePool">
+        <arguments>
+            <argument name="sources" xsi:type="array">
+                <item name="vanilla-cookieconsent" xsi:type="array">
+                    <item name="label" xsi:type="string">Cookie banner (vanilla-cookieconsent)</item>
+                    <item name="provider" xsi:type="object">CommerceKings\ConsentVanilla\Model\Source</item>
+                    <item name="adapter" xsi:type="string">CommerceKings_ConsentVanilla/js/adapter</item>
+                    <item name="banner" xsi:type="object">CommerceKings\ConsentVanilla\ViewModel\Banner</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- A site module supplies categories, descriptions and purpose mappings. -->
+    <type name="CommerceKings\ConsentVanilla\Model\Source">
+        <arguments>
+            <!-- cookie readers per library version (CommerceKings\Consent\Api\CookieFormatInterface) - keep old ones
+                 after an upgrade, visitors still carry old cookies -->
+            <argument name="formats" xsi:type="array">
+                <item name="v3" xsi:type="object">CommerceKings\ConsentVanilla\Model\CookieFormat\V3</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

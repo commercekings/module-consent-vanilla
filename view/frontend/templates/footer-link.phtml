@@ -1,0 +1,11 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \CommerceKings\ConsentVanilla\ViewModel\Banner $viewModel
+ */
+$viewModel = $block->getData('view_model');
+?>
+<?php if ($viewModel->isEnabled() && $viewModel->getFooterLinkText() !== ''): ?>
+<li class="nav item"><a href="#" class="ck-cookie-settings"><?= $escaper->escapeHtml($viewModel->getFooterLinkText()) ?></a></li>
+<?php endif; ?>

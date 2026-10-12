@@ -1,0 +1,31 @@
+{
+    "name": "commercekings/module-consent-vanilla",
+    "description": "vanilla-cookieconsent (orestbida/cookieconsent v3) as a consent source for commercekings/module-consent.",
+    "type": "magento2-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "CommerceKings"
+        }
+    ],
+    "require": {
+        "php": "~8.1.0||~8.2.0||~8.3.0",
+        "magento/framework": "*",
+        "magento/module-config": "*",
+        "commercekings/module-consent": "^0.1",
+        "commercekings/module-consent-defaults": "^0.1"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "CommerceKings\\ConsentVanilla\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.1.x-dev"
+        }
+    }
+}
