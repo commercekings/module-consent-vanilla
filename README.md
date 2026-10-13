@@ -1,5 +1,7 @@
 # CommerceKings_ConsentVanilla
 
+**Development status:** preparing the first public release.
+
 Install in a Magento project with `composer require commercekings/module-consent-vanilla:^0.1` after the first
 release is published. Then enable its modules:
 
