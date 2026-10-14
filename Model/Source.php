@@ -8,6 +8,7 @@ use CommerceKings\Consent\Api\Data\SourceChoice;
 use CommerceKings\Consent\Api\SourceConfigInterface;
 use CommerceKings\Consent\Api\SourceInterface;
 use CommerceKings\Consent\Model\CategoryMapper;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Stdlib\CookieManagerInterface;
 
 /**
@@ -29,6 +30,7 @@ class Source implements SourceInterface
         private readonly CookieManagerInterface $cookieManager,
         private readonly CategoryMapper $categoryMapper,
         private readonly SourceConfigInterface $config,
+        private readonly Json $json,
         private readonly array $categories = [],
         /** @var array<string, CookieFormatInterface> readers, one per cookie layout */
         private readonly array $formats = []
@@ -54,7 +56,14 @@ class Source implements SourceInterface
     public function getChoice(): ?SourceChoice
     {
         $value = $this->cookieManager->getCookie($this->config->getCookieName());
-        $cookie = is_string($value) ? json_decode($value, true) : null;
+        if (!is_string($value)) {
+            return null;
+        }
+        try {
+            $cookie = $this->json->unserialize($value);
+        } catch (\InvalidArgumentException) {
+            return null;
+        }
         $format = is_array($cookie) ? $this->formatFor($cookie) : null;
         if (!$format || $format->revision($cookie) !== $this->config->getRevision()) {
             return null;

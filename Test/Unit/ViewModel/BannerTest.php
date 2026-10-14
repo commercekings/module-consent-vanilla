@@ -32,7 +32,8 @@ class BannerTest extends TestCase
         $sourceConfig->method('getCookieLifetimeDays')->willReturn(90);
         $settings = $this->createStub(BannerSettingsInterface::class);
         $settings->method('getPrivacyUrl')->willReturn($privacy);
-        $source = new Source($this->createStub(CookieManagerInterface::class), new CategoryMapper(new PurposePool([])), $sourceConfig, $categories);
+        $source = new Source($this->createStub(CookieManagerInterface::class), new CategoryMapper(new PurposePool([])),
+            $sourceConfig, new \Magento\Framework\Serialize\Serializer\Json(), $categories);
         return new Banner($sourceConfig, $settings, $source);
     }
 

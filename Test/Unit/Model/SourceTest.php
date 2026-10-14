@@ -9,6 +9,7 @@ use CommerceKings\Consent\Model\CategoryMapper;
 use CommerceKings\Consent\Model\PurposePool;
 use CommerceKings\ConsentVanilla\Model\CookieFormat\V3;
 use CommerceKings\ConsentVanilla\Model\Source;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Stdlib\CookieManagerInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +31,7 @@ class SourceTest extends TestCase
         $config = $this->createStub(SourceConfigInterface::class);
         $config->method('getRevision')->willReturn($revision);
         $config->method('getCookieName')->willReturn('ck_cookie_consent');
-        return new Source($manager, new CategoryMapper($purposes), $config, self::CATEGORIES, $formats ?? ['v3' => new V3()]);
+        return new Source($manager, new CategoryMapper($purposes), $config, new Json(), self::CATEGORIES, $formats ?? ['v3' => new V3()]);
     }
 
     private static function cookie(array $data): string
@@ -81,6 +82,11 @@ class SourceTest extends TestCase
             'array time' => [self::cookie(['lastConsentTimestamp' => ['bad']]), '1'],
             'array revision' => [self::cookie(['revision' => [1]]), '1'],
             'broken cookie' => ['{broken', '1'],
+            'JSON null' => ['null', '1'],
+            'JSON boolean' => ['true', '1'],
+            'JSON number' => ['123', '1'],
+            'JSON string' => ['"personalization"', '1'],
+            'invalid UTF-8' => ["{\"categories\":[\"\xFF\"]}", '1'],
             'v2 cookie, only the v3 reader registered' => ['{"level":["necessary","personalization"],"revision":0}', '1'],
             'saved for an older revision' => [self::cookie([]), '2'],
         ];
