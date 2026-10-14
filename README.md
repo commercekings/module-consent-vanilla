@@ -40,6 +40,7 @@ Choose the source in **Stores > Configuration > CommerceKings > Consent**, or se
 - **Features** use `CommerceKings_Consent/js/consent/provider`. GA lives in the optional `CommerceKings_ConsentGoogleTag` module; iframe behavior belongs to the site. This banner starts no analytics and loads no external content.
 - **Cookie settings link:** a "Cookie settings" item in Magento's footer links; any element with class `ck-cookie-settings` (or the library's `data-cc="show-preferencesModal"`) reopens the preferences. `html` gets class `ck-consent-on` while the banner runs. Themes without `footer_links` place their own link.
 - Cookie name, revision and cookie lifetime are Consent's admin settings (the shop's decisions - a package upgrade never changes them); banner and source use the same values. The banner shows when vanilla-cookieconsent is the chosen *Source* and the site configuration or shared preset includes an optional category. The privacy page link is Consent's *Privacy / cookie policy page* (`Api\BannerSettingsInterface`).
+- Cookie path and domain come from Magento's cookie configuration, matching Consent's browser identity and retry hints.
 - Styling: the library's CSS variables (`#cc-main { --cc-... }`) in your theme.
 
 ## Example: a site module's di.xml

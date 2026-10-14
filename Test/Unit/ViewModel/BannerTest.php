@@ -9,6 +9,7 @@ use CommerceKings\Consent\Model\CategoryMapper;
 use CommerceKings\Consent\Model\PurposePool;
 use CommerceKings\ConsentVanilla\Model\Source;
 use CommerceKings\ConsentVanilla\ViewModel\Banner;
+use Magento\Framework\Session\Config\ConfigInterface as SessionConfigInterface;
 use Magento\Framework\Stdlib\CookieManagerInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -34,7 +35,10 @@ class BannerTest extends TestCase
         $settings->method('getPrivacyUrl')->willReturn($privacy);
         $source = new Source($this->createStub(CookieManagerInterface::class), new CategoryMapper(new PurposePool([])),
             $sourceConfig, new \Magento\Framework\Serialize\Serializer\Json(), $categories);
-        return new Banner($sourceConfig, $settings, $source);
+        $sessionConfig = $this->createStub(SessionConfigInterface::class);
+        $sessionConfig->method('getCookiePath')->willReturn('/shop/');
+        $sessionConfig->method('getCookieDomain')->willReturn('.example.test');
+        return new Banner($sourceConfig, $settings, $source, $sessionConfig);
     }
 
     public function testBannerShowsTheSourceDefinedInCode(): void
@@ -45,6 +49,8 @@ class BannerTest extends TestCase
         $this->assertSame('ck_cookie_consent', $json['cookie'], "the shop's cookie name (admin)");
         $this->assertSame(3, $json['revision'], "the shop's revision (admin)");
         $this->assertSame(90, $json['expiresAfterDays'], "the shop's cookie lifetime (admin)");
+        $this->assertSame('/shop/', $json['cookiePath'], "Magento's cookie path");
+        $this->assertSame('.example.test', $json['cookieDomain'], "Magento's cookie domain");
         $this->assertSame('https://shop.test/privacy', $json['privacyUrl'], "Consent's banner setting");
         $this->assertArrayNotHasKey('analyticsCategory', $json, 'features are independent of the banner');
         $this->assertSame('We use cookies', $json['texts']['banner_title'], 'English source text, translated by Magento i18n');

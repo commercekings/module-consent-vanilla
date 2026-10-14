@@ -7,6 +7,7 @@ use CommerceKings\Consent\Api\BannerSettingsInterface;
 use CommerceKings\Consent\Api\BannerConfigInterface;
 use CommerceKings\Consent\Api\SourceConfigInterface;
 use CommerceKings\ConsentVanilla\Model\Source;
+use Magento\Framework\Session\Config\ConfigInterface as SessionConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 /**
@@ -20,7 +21,8 @@ class Banner implements ArgumentInterface, BannerConfigInterface
     public function __construct(
         private readonly SourceConfigInterface $sourceConfig,
         private readonly BannerSettingsInterface $bannerSettings,
-        private readonly Source $source
+        private readonly Source $source,
+        private readonly SessionConfigInterface $sessionConfig
     ) {
     }
 
@@ -52,6 +54,8 @@ class Banner implements ArgumentInterface, BannerConfigInterface
             'cookie' => $this->sourceConfig->getCookieName(),
             'revision' => (int)$this->sourceConfig->getRevision(),
             'expiresAfterDays' => $this->sourceConfig->getCookieLifetimeDays(),
+            'cookiePath' => $this->sessionConfig->getCookiePath(),
+            'cookieDomain' => $this->sessionConfig->getCookieDomain(),
             'privacyUrl' => $this->bannerSettings->getPrivacyUrl(),
             'texts' => $this->texts(),
             'categories' => $categories,

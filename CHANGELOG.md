@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Apply Magento's configured cookie path and domain to the Vanilla banner while retaining Consent's configured lifetime.
+
 - Decode banner cookies through Magento's JSON serializer; malformed, scalar and invalid UTF-8 cookie values cannot grant consent.
 
 - Reject malformed cookie types and choices without a valid reference/time before granting consent.

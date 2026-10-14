@@ -2,7 +2,7 @@
  * Runs the bundled banner and opens its preferences. Features use Consent's purpose API;
  * this module only owns the source UI and its saved category choices.
  */
-define(['CommerceKings_Consent/js/consent/provider', 'vanilla-cookieconsent'], function (provider, CookieConsent) {
+define(['jquery', 'CommerceKings_Consent/js/consent/provider', 'vanilla-cookieconsent', 'mage/cookies'], function ($, provider, CookieConsent) {
     'use strict';
 
     var element = document.getElementById('commercekings-consent-banner'),
@@ -52,7 +52,12 @@ define(['CommerceKings_Consent/js/consent/provider', 'vanilla-cookieconsent'], f
 
         CookieConsent.run({
             revision: settings.revision || 0,
-            cookie: {name: settings.cookie || 'cc_cookie', expiresAfterDays: settings.expiresAfterDays},
+            cookie: {
+                name: settings.cookie || 'cc_cookie',
+                expiresAfterDays: settings.expiresAfterDays,
+                path: settings.cookiePath || $.mage.cookies.defaults.path,
+                domain: settings.cookieDomain || $.mage.cookies.defaults.domain
+            },
             guiOptions: {
                 consentModal: {layout: 'bar inline', position: 'bottom', equalWeightButtons: true, flipButtons: false},
                 preferencesModal: {layout: 'box', equalWeightButtons: true, flipButtons: false}
