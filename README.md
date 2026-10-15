@@ -19,12 +19,12 @@ See [compatibility and verification](COMPATIBILITY.md) and [changes](CHANGELOG.m
 
 ## The library (bundled)
 - `view/frontend/web/js/lib/cookieconsent.umd.js` + `css/lib/cookieconsent.css` (+ LICENSE, README with version and npm shasum), RequireJS module **`vanilla-cookieconsent`**.
-- **Version:** each cookie reader states the exact library version it was written for (`CookieFormat\V3`, `VERSION` = `3.1.0`; it extends Consent's `AbstractCookieFormat` with the default paths); admin shows the newest as *Banner version*. A unit test fails if the bundled file's version and the reader's disagree.
+- **Version:** each cookie reader states the exact library version it was written for (`CookieFormat\V3`, `VERSION` = `3.1.0`; it extends Consent's `AbstractCookieFormat` with the default paths); admin shows the newest as *Source version*. A unit test fails if the bundled file's version and the reader's disagree.
 - **Versioning:** a new library major needs its own cookie reader and an adapter compatibility review. Bundle the library and readers in the same package release; the package version is independent of the library version.
 - **Cookie readers per major** implement `CommerceKings\Consent\Api\CookieFormatInterface` (the contract lives in Consent – this module declares no interfaces of its own) and are registered in `di.xml` → `Model\Source` argument `formats`: today `CookieFormat\V3`. After an upgrade keep the old reader – visitors still carry cookies written by the old major; `Source` picks the newest reader whose `matches()` accepts the cookie.
 - Upgrade: replace the two files (verify the shasum), bump the reader's version (same cookie layout) or add a reader for the new layout and keep the old one, release a new package version.
 
-- `Model\Source::getChoice()` – the banner cookie as a `SourceChoice`: a purpose is agreed to when its **category** is accepted; the choice is identified by `consentId` (stays while the visitor changes choices) + `lastConsentTimestamp` (changes on every save); `revision` and `expirationTime` from the cookie. A cookie saved for another revision than *Banner revision* is **no choice** – the banner asks again, every consent of the old revision is invalid (CommerceKings_Consent).
+- `Model\Source::getChoice()` – the banner cookie as a `SourceChoice`: a purpose is agreed to when its **category** is accepted; the choice is identified by `consentId` (stays while the visitor changes choices) + `lastConsentTimestamp` (changes on every save); `revision` and `expirationTime` from the cookie. A cookie saved for another revision than *Source revision* is **no choice** – the banner asks again, every consent of the old revision is invalid (CommerceKings_Consent).
 - `view/frontend/web/js/adapter.js` (v3) – reads the cookie (ignored when its revision is not the configured one), `hasChoice()`, listens to `cc:onFirstConsent` / `cc:onChange` (fires only when that purpose's category changed), `accept(purpose)` / `revoke(purpose)` through the bundled library, preserving other choices.
 - Registered in `Consent\Model\SourcePool` as `vanilla-cookieconsent` (etc/di.xml).
 
@@ -39,7 +39,7 @@ Choose the source in **Stores > Configuration > CommerceKings > Consent**, or se
 - **Texts**: English in code (`ViewModel\Banner`, category labels/descriptions in ConsentDefaults or the site's `di.xml`), translated with Magento i18n per store view locale.
 - **Features** use `CommerceKings_Consent/js/consent/provider`. GA lives in the optional `CommerceKings_ConsentGoogleTag` module; iframe behavior belongs to the site. This banner starts no analytics and loads no external content.
 - **Cookie settings link:** a "Cookie settings" item in Magento's footer links; any element with class `ck-cookie-settings` (or the library's `data-cc="show-preferencesModal"`) reopens the preferences. `html` gets class `ck-consent-on` while the banner runs. Themes without `footer_links` place their own link.
-- Cookie name, revision and cookie lifetime are Consent's admin settings (the shop's decisions - a package upgrade never changes them); banner and source use the same values. The banner shows when vanilla-cookieconsent is the chosen *Cookie banner* and the site configuration or shared preset includes an optional category. The privacy page link is Consent's *Privacy policy page* (`Api\BannerSettingsInterface`).
+- Cookie name, revision and cookie lifetime are Consent's admin settings (the shop's decisions - a package upgrade never changes them); banner and source use the same values. The banner shows when vanilla-cookieconsent is the chosen *Source* and the site configuration or shared preset includes an optional category. The privacy page link is Consent's *Privacy policy page* (`Api\BannerSettingsInterface`).
 - Cookie path and domain come from Magento's cookie configuration, matching Consent's browser identity and retry hints.
 - Styling: the library's CSS variables (`#cc-main { --cc-... }`) in your theme.
 
@@ -68,7 +68,7 @@ Declare any feature purpose in its owning module first, then map it in the site 
     </arguments>
 </type>
 ```
-Admin (Consent) shows the result read-only: *Banner version* and *Banner categories*. Raising *Banner revision* asks visitors again and invalidates earlier consents. Cookie patterns displayed in admin come from feature purpose metadata; this adapter performs no cookie cleanup.
+Admin (Consent) shows the result read-only: *Source version* and *Source categories*. Raising *Source revision* asks visitors again and invalidates earlier consents. Cookie patterns displayed in admin come from feature purpose metadata; this adapter performs no cookie cleanup.
 
 ## Tests
 From the Magento root, with the package installed:
