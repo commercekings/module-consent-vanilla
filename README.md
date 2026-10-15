@@ -6,7 +6,7 @@ Install in a Magento project with `composer require commercekings/module-consent
 release is published. Then enable its modules:
 
 ```sh
-bin/magento module:enable CommerceKings_Consent CommerceKings_ConsentDefaults CommerceKings_ConsentVanilla
+bin/magento module:enable CommerceKings_Core CommerceKings_Consent CommerceKings_ConsentDefaults CommerceKings_ConsentVanilla
 bin/magento setup:upgrade
 bin/magento cache:clean
 ```
