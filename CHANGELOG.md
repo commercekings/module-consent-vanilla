@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Show the configured privacy policy in both the first notice and preferences, with an explicit translated label and escaped link markup.
 - Apply Magento's configured cookie path and domain to the Vanilla banner while retaining Consent's configured lifetime.
 
 - Decode banner cookies through Magento's JSON serializer; malformed, scalar and invalid UTF-8 cookie values cannot grant consent.

@@ -71,7 +71,7 @@ class Banner implements ArgumentInterface, BannerConfigInterface
             'banner_accept' => (string)__('Accept'),
             'banner_reject' => (string)__('Reject'),
             'banner_settings' => (string)__('Settings'),
-            'privacy_link' => (string)__('Learn more'),
+            'privacy_link' => (string)__('Privacy policy'),
             'prefs_title' => (string)__('Cookie settings'),
             'prefs_intro' => (string)__('Choose which optional cookies and data uses you allow. Your choice applies to this browser and you can withdraw it at any time.'),
             'prefs_accept' => (string)__('Accept all'),

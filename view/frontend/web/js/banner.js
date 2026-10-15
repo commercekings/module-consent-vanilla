@@ -2,7 +2,7 @@
  * Runs the bundled banner and opens its preferences. Features use Consent's purpose API;
  * this module only owns the source UI and its saved category choices.
  */
-define(['jquery', 'CommerceKings_Consent/js/consent/provider', 'vanilla-cookieconsent', 'mage/cookies'], function ($, provider, CookieConsent) {
+define(['jquery', 'underscore', 'CommerceKings_Consent/js/consent/provider', 'vanilla-cookieconsent', 'mage/cookies'], function ($, _, provider, CookieConsent) {
     'use strict';
 
     var element = document.getElementById('commercekings-consent-banner'),
@@ -29,7 +29,7 @@ define(['jquery', 'CommerceKings_Consent/js/consent/provider', 'vanilla-cookieco
 
     function privacyLink() {
         return settings.privacyUrl && text('privacy_link')
-            ? ' <a href="' + settings.privacyUrl + '" class="cc-link">' + text('privacy_link') + '</a>'
+            ? ' <a href="' + _.escape(settings.privacyUrl) + '" class="cc-link">' + _.escape(text('privacy_link')) + '</a>'
             : '';
     }
 
@@ -80,7 +80,7 @@ define(['jquery', 'CommerceKings_Consent/js/consent/provider', 'vanilla-cookieco
                             acceptNecessaryBtn: text('prefs_reject'),
                             savePreferencesBtn: text('prefs_save'),
                             closeIconLabel: text('prefs_close'),
-                            sections: [{description: text('prefs_intro')}].concat(categories().map(function (category) {
+                            sections: [{description: text('prefs_intro') + privacyLink()}].concat(categories().map(function (category) {
                                 return {
                                     title: category.title + (category.required
                                         ? ' <span class="pm__badge">' + text('always_on') + '</span>' : ''),

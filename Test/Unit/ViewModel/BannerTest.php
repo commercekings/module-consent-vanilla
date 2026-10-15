@@ -52,6 +52,7 @@ class BannerTest extends TestCase
         $this->assertSame('/shop/', $json['cookiePath'], "Magento's cookie path");
         $this->assertSame('.example.test', $json['cookieDomain'], "Magento's cookie domain");
         $this->assertSame('https://shop.test/privacy', $json['privacyUrl'], "Consent's banner setting");
+        $this->assertSame('Privacy policy', $json['texts']['privacy_link']);
         $this->assertArrayNotHasKey('analyticsCategory', $json, 'features are independent of the banner');
         $this->assertSame('We use cookies', $json['texts']['banner_title'], 'English source text, translated by Magento i18n');
         $this->assertSame([
