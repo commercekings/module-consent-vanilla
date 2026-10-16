@@ -1,11 +1,10 @@
 # Changelog
 
-## Unreleased (0.2)
+## Unreleased
 
-- Share browser logic between the existing Magento entry points and the optional Hyvä adapter; keep the public AMD API and PHP source contracts.
-
-## Unreleased (0.1)
-
+- **Hyvä:** the banner without RequireJS on Hyvä themes, detected by Hyvä's `hyva_default` layout handle – a settings
+  button, Hyvä cookie groups kept in sync with the banner, Magento's native cookie notice hidden. Banner and adapter
+  logic is shared with the Luma entry points (`adapter-core.js`, `banner-core.js`); no dependency on Hyvä packages.
 - Declares `"provide": {"commercekings/consent-source": "0.1.0"}`: it is the consent banner that the bridge and
   Google tags require.
 - Show the configured privacy policy in both the first notice and preferences, with an explicit translated label and escaped link markup.

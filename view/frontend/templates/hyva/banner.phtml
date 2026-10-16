@@ -1,0 +1,21 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \CommerceKings\ConsentVanilla\ViewModel\Banner $viewModel
+ */
+$viewModel = $block->getData('view_model');
+// Hyvä: this banner without RequireJS; Consent's Hyvä block adds the purpose API it registers with.
+$scripts = [
+    'CommerceKings_ConsentVanilla::js/lib/cookieconsent.umd.js',
+    'CommerceKings_ConsentVanilla::js/adapter-core.js',
+    'CommerceKings_ConsentVanilla::js/banner-core.js',
+    'CommerceKings_ConsentVanilla::js/hyva.js',
+];
+?>
+<?php if ($viewModel->isEnabled()): ?>
+<script type="application/json" id="commercekings-consent-banner"><?= /* @noEscape */ $viewModel->getConfigJson() ?></script>
+<?php foreach ($scripts as $script): ?>
+<script src="<?= $escaper->escapeUrl($block->getViewFileUrl($script)) ?>" defer></script>
+<?php endforeach; ?>
+<?php endif; ?>

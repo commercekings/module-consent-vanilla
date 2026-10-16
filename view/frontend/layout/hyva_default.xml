@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- Hyvä themes only (Hyvä adds the hyva_default handle): this banner without RequireJS -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="CommerceKings_ConsentVanilla::css/hyva-settings.css"/>
+    </head>
+    <body>
+        <referenceBlock name="commercekings.consent.banner" template="CommerceKings_ConsentVanilla::hyva/banner.phtml"/>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="commercekings.consent.hyva.settings" template="CommerceKings_ConsentVanilla::hyva/settings.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">CommerceKings\ConsentVanilla\ViewModel\Banner</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

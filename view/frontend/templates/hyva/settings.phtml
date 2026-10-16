@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \CommerceKings\ConsentVanilla\ViewModel\Banner $viewModel
+ */
+$viewModel = $block->getData('view_model');
+?>
+<?php if ($viewModel->isEnabled() && $viewModel->getFooterLinkText() !== ''): ?>
+<button type="button" class="ck-cookie-settings ck-hyva-consent-settings">
+    <?= $escaper->escapeHtml($viewModel->getFooterLinkText()) ?>
+</button>
+<?php endif; ?>

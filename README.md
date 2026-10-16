@@ -5,15 +5,15 @@ A cookie banner for Magento 2, built on the bundled
 `CommerceKings_Consent`: the visitor's choice in the banner is what features get consent from.
 
 ```sh
-composer require commercekings/module-consent-vanilla:^0.2
+composer require commercekings/module-consent-vanilla:^0.1
 bin/magento setup:upgrade
 ```
 
 It brings `commercekings/module-consent` and the default categories (`commercekings/module-consent-defaults`), and it
 provides `commercekings/consent-source` – the banner the notification bridge and Google tags require.
 
-For Hyvä, also install `commercekings/module-consent-vanilla-hyva:^0.2`. It uses this same source, cookie format
-and banner implementation with a native frontend entry point.
+Works on Luma and **Hyvä** themes: a Hyvä store view is detected automatically and gets the same banner without
+RequireJS. Nothing extra to install or configure.
 
 ## Setup
 
