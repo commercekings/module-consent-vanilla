@@ -1,8 +1,8 @@
 # Cookie banner
 
-**A clean, fast cookie banner that records real consent.**
+**A fast, clean cookie banner that records real, provable consent.**
 
-Luma and Hyvä · categories shown only when used · translatable · themeable
+Built on vanilla-cookieconsent 3.1 · Luma and Hyvä, detected automatically · categories appear only when something uses them · privacy policy link and cookie settings link built in · translatable and themeable
 
 A cookie banner for Magento 2, built on the bundled
 [vanilla-cookieconsent](https://github.com/orestbida/cookieconsent) 3.1.0. It is the consent **source** for
