@@ -1,5 +1,9 @@
 # Cookie banner
 
+**A clean, fast cookie banner that records real consent.**
+
+Luma and Hyvä · categories shown only when used · translatable · themeable
+
 A cookie banner for Magento 2, built on the bundled
 [vanilla-cookieconsent](https://github.com/orestbida/cookieconsent) 3.1.0. It is the consent **source** for
 `CommerceKings_Consent`: the visitor's choice in the banner is what features get consent from.
