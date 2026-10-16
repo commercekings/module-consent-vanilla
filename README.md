@@ -2,11 +2,11 @@
 
 # Cookie banner
 
+<sub>Expert Magento engineering. New store, maintenance, custom development, high-performance hosting or more sales? [Talk to us](https://commercekings.net).</sub>
+
 Works with Magento 2.4+ · Luma and Hyvä · PHP 8.1–8.5
 
 [![License](https://badgen.net/github/license/commercekings/module-consent-vanilla)](LICENSE) [![Release](https://badgen.net/github/release/commercekings/module-consent-vanilla)](https://github.com/commercekings/module-consent-vanilla/releases) [![Checks](https://badgen.net/github/checks/commercekings/module-consent-vanilla/main?label=checks)](https://github.com/commercekings/module-consent-vanilla/actions)
-
-<sub>Expert Magento engineering. New store, maintenance, custom development, high-performance hosting or more sales? [Talk to us](https://commercekings.net).</sub>
 
 **A fast, clean cookie banner that records real, provable consent.**
 
