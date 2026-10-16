@@ -41,3 +41,10 @@ The banner starts no analytics and loads no external content itself; feature mod
 
 [How it works](docs/how-it-works.md) – the library and its upgrades, the source, the banner, a site `di.xml` example ·
 [Compatibility](COMPATIBILITY.md) · [Changes](CHANGELOG.md)
+
+## Disclaimer
+
+These modules help you ask for, record and respect your shoppers' choices – they don't make your store compliant on
+their own. You are responsible for your store's privacy: what you collect, the wording you show, your privacy policy
+and whether your setup meets the laws that apply to you (e.g. GDPR, ePrivacy, email marketing rules). Get legal advice
+if you are unsure.
