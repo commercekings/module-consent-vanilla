@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Declares `"provide": {"commercekings/consent-source": "0.1.0"}`: it is the consent banner that the bridge and
+  Google tags require.
 - Show the configured privacy policy in both the first notice and preferences, with an explicit translated label and escaped link markup.
 - Apply Magento's configured cookie path and domain to the Vanilla banner while retaining Consent's configured lifetime.
 
