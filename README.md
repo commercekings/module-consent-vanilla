@@ -9,7 +9,8 @@ composer require commercekings/module-consent-vanilla:^0.1
 bin/magento setup:upgrade
 ```
 
-It brings `commercekings/module-consent` and the default categories (`commercekings/module-consent-defaults`).
+It brings `commercekings/module-consent` and the default categories (`commercekings/module-consent-defaults`), and it
+provides `commercekings/consent-source` – the banner the notification bridge and Google tags require.
 
 ## Setup
 
