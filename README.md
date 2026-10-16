@@ -1,6 +1,4 @@
-# CommerceKings_ConsentVanilla
-
-**Development status:** first-release feature scope frozen; polishing and verification remain before publication.
+# Cookie banner
 
 A cookie banner for Magento 2, built on the bundled
 [vanilla-cookieconsent](https://github.com/orestbida/cookieconsent) 3.1.0. It is the consent **source** for
