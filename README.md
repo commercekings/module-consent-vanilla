@@ -1,12 +1,16 @@
 # Cookie banner
 
+Works with Magento 2.4+ · Luma and Hyvä · PHP 8.1–8.5
+
 **A fast, clean cookie banner that records real, provable consent.**
 
-Built on vanilla-cookieconsent 3.1 · Luma and Hyvä, detected automatically · categories appear only when something uses them · privacy policy link and cookie settings link built in · translatable and themeable
+- **Luma and Hyvä, detected automatically** – nothing to configure per theme.
+- **Only what you use.** Categories appear only when a feature needs them.
+- **Ready for your policy.** Privacy policy link and a "Cookie settings" link built in.
+- **Yours to style.** Translatable texts and CSS variables for your theme.
 
-A cookie banner for Magento 2, built on the bundled
-[vanilla-cookieconsent](https://github.com/orestbida/cookieconsent) 3.1.0. It is the consent **source** for
-`CommerceKings_Consent`: the visitor's choice in the banner is what features get consent from.
+Built on the bundled [vanilla-cookieconsent](https://github.com/orestbida/cookieconsent) 3.1.0; it is the consent
+**source** for `CommerceKings_Consent`.
 
 ```sh
 composer require commercekings/module-consent-vanilla:^0.1
@@ -16,17 +20,13 @@ bin/magento setup:upgrade
 It brings `commercekings/module-consent` and the default categories (`commercekings/module-consent-defaults`), and it
 provides `commercekings/consent-source` – the banner the notification bridge and Google tags require.
 
-Works on Luma and **Hyvä** themes: a Hyvä store view is detected automatically and gets the same banner without
-RequireJS. Nothing extra to install or configure.
-
 ## Setup
 
 1. Select **Cookie banner (vanilla-cookieconsent)** in **Stores > Configuration > CommerceKings > Consent > Source**.
 2. Set the *Privacy policy page* there – the banner links it.
 3. Flush the full page cache.
 
-The banner shows only while at least one optional category is in use. A "Cookie settings" link is added to the
-footer links; any element with class `ck-cookie-settings` reopens the preferences.
+Besides the footer link, any element with class `ck-cookie-settings` reopens the preferences.
 
 ## Customization
 
