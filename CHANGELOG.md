@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## Unreleased (0.2)
+
+- Share browser logic between the existing Magento entry points and the optional Hyvä adapter; keep the public AMD API and PHP source contracts.
+
+## Unreleased (0.1)
 
 - Declares `"provide": {"commercekings/consent-source": "0.1.0"}`: it is the consent banner that the bridge and
   Google tags require.

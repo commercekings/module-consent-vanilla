@@ -1,107 +1,13 @@
-/**
- * Runs the bundled banner and opens its preferences. Features use Consent's purpose API;
- * this module only owns the source UI and its saved category choices.
- */
-define(['jquery', 'underscore', 'CommerceKings_Consent/js/consent/provider', 'vanilla-cookieconsent', 'mage/cookies'], function ($, _, provider, CookieConsent) {
+/** Magento entry point for the shared Vanilla banner. Load the provider before starting the source. */
+define([
+    'jquery',
+    'underscore',
+    'CommerceKings_Consent/js/consent/provider',
+    'vanilla-cookieconsent',
+    'CommerceKings_ConsentVanilla/js/banner-core',
+    'mage/cookies'
+], function ($, _, provider, CookieConsent, createBanner) {
     'use strict';
 
-    var element = document.getElementById('commercekings-consent-banner'),
-        settings = element ? JSON.parse(element.textContent || '{}') : null,
-        started = false;
-
-    function text(key) {
-        return (settings.texts || {})[key] || '';
-    }
-
-    function categories() {
-        return settings.categories || [];
-    }
-
-    function bindSettingsLinks() {
-        document.documentElement.classList.add('ck-consent-on');
-        document.querySelectorAll('.ck-cookie-settings').forEach(function (link) {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                CookieConsent.showPreferences();
-            });
-        });
-    }
-
-    function privacyLink() {
-        return settings.privacyUrl && text('privacy_link')
-            ? ' <a href="' + _.escape(settings.privacyUrl) + '" class="cc-link">' + _.escape(text('privacy_link')) + '</a>'
-            : '';
-    }
-
-    function categoryConfig() {
-        var config = {};
-        categories().forEach(function (category) {
-            config[category.key] = category.required ? {enabled: true, readOnly: true} : {};
-        });
-        return config;
-    }
-
-    function start() {
-        if (!settings) {
-            return;
-        }
-        if (started) {
-            return;
-        }
-        started = true;
-
-        CookieConsent.run({
-            revision: settings.revision || 0,
-            cookie: {
-                name: settings.cookie || 'cc_cookie',
-                expiresAfterDays: settings.expiresAfterDays,
-                path: settings.cookiePath || $.mage.cookies.defaults.path,
-                domain: settings.cookieDomain || $.mage.cookies.defaults.domain
-            },
-            guiOptions: {
-                consentModal: {layout: 'bar inline', position: 'bottom', equalWeightButtons: true, flipButtons: false},
-                preferencesModal: {layout: 'box', equalWeightButtons: true, flipButtons: false}
-            },
-            categories: categoryConfig(),
-            language: {
-                default: 'shop',
-                translations: {
-                    shop: {
-                        consentModal: {
-                            title: text('banner_title'),
-                            description: text('banner_description') + privacyLink(),
-                            acceptAllBtn: text('banner_accept'),
-                            acceptNecessaryBtn: text('banner_reject'),
-                            showPreferencesBtn: text('banner_settings')
-                        },
-                        preferencesModal: {
-                            title: text('prefs_title'),
-                            acceptAllBtn: text('prefs_accept'),
-                            acceptNecessaryBtn: text('prefs_reject'),
-                            savePreferencesBtn: text('prefs_save'),
-                            closeIconLabel: text('prefs_close'),
-                            sections: [{description: text('prefs_intro') + privacyLink()}].concat(categories().map(function (category) {
-                                return {
-                                    title: category.title + (category.required
-                                        ? ' <span class="pm__badge">' + text('always_on') + '</span>' : ''),
-                                    description: category.description,
-                                    linkedCategory: category.key
-                                };
-                            }))
-                        }
-                    }
-                }
-            }
-        });
-
-        bindSettingsLinks();
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', start);
-    } else {
-        start();
-    }
-
-    return start;
+    return createBanner(CookieConsent, $.mage.cookies.defaults, _.escape);
 });
