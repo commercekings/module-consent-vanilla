@@ -10,15 +10,17 @@ Works with Magento 2.4+ · Luma and Hyvä · PHP 8.1–8.5
 - **Yours to style.** Translatable texts and CSS variables for your theme.
 
 Built on the bundled [vanilla-cookieconsent](https://github.com/orestbida/cookieconsent) 3.1.0; it is the consent
-**source** for `CommerceKings_Consent`.
+**source** for **Consent**.
+
+## Installation
 
 ```sh
 composer require commercekings/module-consent-vanilla:^0.1
 bin/magento setup:upgrade
 ```
 
-It brings `commercekings/module-consent` and the default categories (`commercekings/module-consent-defaults`), and it
-provides `commercekings/consent-source` – the banner the notification bridge and Google tags require.
+It brings **Consent** and the default categories, and provides `commercekings/consent-source` – the banner the
+notification bridge and Google tags require.
 
 ## Setup
 
