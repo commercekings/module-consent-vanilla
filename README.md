@@ -36,7 +36,8 @@ Besides the footer link, any element with class `ck-cookie-settings` reopens the
 
 - **Texts**: English in code, translated with Magento's `i18n/<locale>.csv`.
 - **Categories**: the defaults, or your own complete `categories` on `CommerceKings\ConsentVanilla\Model\Source` in
-  your site module's `di.xml` – then raise *Source revision*.
+  your site module's `di.xml` – then raise *Source revision*. List each purpose in one category; listed in several, it
+  stays in the first.
 - **Styling**: the library's CSS variables (`#cc-main { --cc-... }`) in your theme.
 
 The banner starts no analytics and loads no external content itself; feature modules do that once consent is given.

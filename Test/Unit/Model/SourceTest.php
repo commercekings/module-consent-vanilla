@@ -51,19 +51,21 @@ class SourceTest extends TestCase
         $source = $this->source(null);
         $this->assertSame('3.1.0', $source->getVersion(), 'newest cookie format reader');
         $this->assertSame(['necessary', 'analytics', 'marketing', 'personalization'], array_keys($source->getCategories()), 'sort_order');
-        $this->assertSame(['cart_reminder'], $source->getCategories()['personalization']['purposes'], 'undeclared purposes dropped');
+        $this->assertSame(['cart_reminder'], $source->getCategories()['marketing']['purposes']);
+        $this->assertSame([], $source->getCategories()['personalization']['purposes'],
+            'undeclared purposes dropped; cart_reminder belongs to its first category only (marketing)');
         $this->assertTrue($source->getCategories()['necessary']['required']);
     }
 
     public function testChoiceGivesThePurposesOfTheAcceptedCategories(): void
     {
         $choice = $this->source(self::cookie([]))->getChoice();
-        $this->assertSame(['cart_reminder'], $choice->purposes);
+        $this->assertSame([], $choice->purposes, 'personalization does not grant cart_reminder: the banner switch is marketing');
         $this->assertSame('2b8885ca-7706-4557-8a47-b31cc07d2cce', $choice->reference);
         $this->assertSame('2026-10-10 09:00:00', $choice->givenAt);
         $this->assertSame('2027-04-13 15:51:49', $choice->expiresAt);
         $this->assertSame([], $this->source(self::cookie(['categories' => ['necessary']]))->getChoice()->purposes);
-        $this->assertSame(['analytics_purpose', 'cart_reminder'], $this->source(self::cookie(['categories' => ['analytics', 'marketing']]))->getChoice()->purposes, 'any granting category');
+        $this->assertSame(['analytics_purpose', 'cart_reminder'], $this->source(self::cookie(['categories' => ['analytics', 'marketing']]))->getChoice()->purposes, 'the category the banner shows for each purpose');
     }
 
     /** @dataProvider noChoice */
