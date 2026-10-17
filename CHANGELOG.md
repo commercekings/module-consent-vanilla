@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Requires Magento 2.4.4 or later (`magento/framework ^103.0.4`): Magento 2.4.0–2.4.3 do not run on PHP 8.1.
 - **Hyvä:** the banner without RequireJS on Hyvä themes, detected by Hyvä's `hyva_default` layout handle – a settings
   button, Hyvä cookie groups kept in sync with the banner, Magento's native cookie notice hidden. Banner and adapter
   logic is shared with the Luma entry points (`adapter-core.js`, `banner-core.js`); no dependency on Hyvä packages.
