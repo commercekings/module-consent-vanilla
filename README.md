@@ -2,7 +2,7 @@
 
 Works with Magento 2.4.4+ · Luma and Hyvä · PHP 8.1–8.5
 
-[![License](https://badgen.net/github/license/commercekings/module-consent-vanilla)](LICENSE) [![Release](https://badgen.net/github/release/commercekings/module-consent-vanilla)](https://github.com/commercekings/module-consent-vanilla/releases) [![Checks](https://badgen.net/github/checks/commercekings/module-consent-vanilla/main?label=checks)](https://github.com/commercekings/module-consent-vanilla/actions)
+[![License](https://badgen.net/github/license/commercekings/module-consent-vanilla)](LICENSE) [![Release](https://badgen.net/github/release/commercekings/module-consent-vanilla)](https://github.com/commercekings/module-consent-vanilla/releases) [![Checks](https://github.com/commercekings/module-consent-vanilla/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/commercekings/module-consent-vanilla/actions/workflows/checks.yml)
 
 **A fast, clean cookie banner that records real, provable consent.**
 
