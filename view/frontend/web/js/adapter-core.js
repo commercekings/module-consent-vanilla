@@ -74,7 +74,10 @@
             } catch (e) {
                 return null;
             }
-            return cookie && cookie.categories && categoriesIn(cookie).length ? cookie : null;
+            // a saved choice even with nothing accepted ("Reject all" where no category is always on): the server
+            // must hear that withdrawal too
+            return cookie && Array.isArray(cookie.categories)
+                && String(parseInt(cookie.revision, 10) || 0) === String(config().revision || 0) ? cookie : null;
         }
 
         return {

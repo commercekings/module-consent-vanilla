@@ -160,6 +160,23 @@ test('navigation retries a historical withdrawal even after recording that purpo
     assert.equal(f.provider().hasConsent('analytics'), false);
 });
 
+test('"Reject all" reaches the server even when no category is always on', async () => {
+    // a site's own categories without "necessary": the saved choice then accepts nothing at all
+    const banner = {categories: [{key: 'analytics', required: false}, {key: 'personalization', required: false}]};
+    const f = fixture({banner});
+    f.choose(['personalization']); f.requests[0].complete(); await f.flush();
+    f.choose([]);
+    assert.ok(f.requests[1].url.endsWith('/ckconsent/withdraw'), 'the withdrawal is sent');
+    assert.equal(new URLSearchParams(f.requests[1].body).get('purpose'), 'cart_reminder');
+    f.requests[1].complete({withdrawn: 1}); await f.flush();
+    assert.equal(f.seen().cart_reminder, undefined);
+
+    // ...and a page loaded later still sends a withdrawal that did not get through
+    const later = fixture({banner, cookie: {revision: 2, categories: []}, seen: {cart_reminder: 1}});
+    assert.ok(later.requests[0].url.endsWith('/withdraw'));
+    assert.equal(new URLSearchParams(later.requests[0].body).get('purpose'), 'cart_reminder');
+});
+
 test('an old revision does not grant either a purpose or a Hyva cookie group', () => {
     const f = fixture({cookie: {revision: 1, categories: ['necessary', 'analytics', 'personalization']}});
     assert.equal(f.provider().hasConsent('analytics'), false);
