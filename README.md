@@ -24,7 +24,7 @@ bin/magento setup:upgrade
 It brings **Consent** and the default categories, and provides `commercekings/consent-source` – the banner the
 notification bridge and Google tags require.
 
-## Setup
+## Settings
 
 1. Select **Cookie banner (vanilla-cookieconsent)** in **Stores > Configuration > CommerceKings > Consent > Source**.
 2. Set the *Privacy policy page* there – the banner links it.
