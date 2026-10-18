@@ -119,7 +119,7 @@ test('HTTP failure, malformed JSON, network failure and refused grants all fail 
         f.choose(['personalization']); fail(f.requests[0]); await f.flush();
         assert.equal(f.provider().hasConsent('cart_reminder'), false);
         assert.equal(f.b.context.cookie_consent_groups.personalization, false);
-        assert.equal(f.seen().cart_reminder, 1);
+        assert.equal(f.seen().cart_reminder, 2, 'not acknowledged: a later page keeps it off and asks again');
         assert.equal(f.timers.size, 0);
     }
 });
