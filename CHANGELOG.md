@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Opening the preferences fires the window event `ck-consent:preferences`, so Consent can switch off a "yes"
+  withdrawn with the email link on another device. Only an event: an older Consent ignores it.
 - A saved choice that accepts nothing ("Reject all" with no always-on category) counts as a choice, so its
   withdrawal reaches the server.
 - Requires Magento 2.4.4 or later (`magento/framework ^103.0.4`): Magento 2.4.0–2.4.3 do not run on PHP 8.1.

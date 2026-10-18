@@ -216,3 +216,33 @@ test('a group mapped to multiple purposes waits until all recorded purposes are 
     f.requests[1].complete(); await f.flush();
     assert.equal(f.b.context.cookie_consent_groups.personalization, true);
 });
+
+const accepted = {revision: 2, categories: ['necessary', 'analytics', 'personalization'], consentId: 'source-choice',
+    consentTimestamp: '2026-10-18T10:00:00.000Z', lastConsentTimestamp: '2026-10-18T10:00:00.000Z'};
+
+test('opening Cookie settings asks the server and switches off a category withdrawn on another device', async () => {
+    const f = fixture({cookie: accepted, seen: {cart_reminder: 1}});
+    f.config().onModalShow({modalName: 'consentModal'});
+    assert.equal(f.requests.length, 0, 'only the preferences ask');
+    f.config().onModalShow({modalName: 'preferencesModal'});
+    const check = f.requests.at(-1);
+    assert.equal(check.url, 'https://shop.example.test/shop/ckconsent/status');
+    assert.equal(check.method, undefined, 'GET');
+    assert.equal(check.cache, 'no-store');
+    check.complete({withdrawn: ['cart_reminder']});
+    await f.flush();
+    await f.flush();
+    const cookie = JSON.parse(decodeURIComponent(f.b.cookies.get('cc_cookie')));
+    assert.deepEqual(cookie.categories, ['necessary', 'analytics'], 'only the withdrawn purpose category is switched off');
+    assert.equal(f.requests.at(-1).url, 'https://shop.example.test/shop/ckconsent/withdraw');
+});
+
+test('a failed check leaves the banner as it is', async () => {
+    const f = fixture({cookie: accepted});
+    f.config().onModalShow({modalName: 'preferencesModal'});
+    f.requests.at(-1).complete({}, 500);
+    await f.flush();
+    await f.flush();
+    const cookie = JSON.parse(decodeURIComponent(f.b.cookies.get('cc_cookie')));
+    assert.equal(cookie.categories.includes('personalization'), true);
+});

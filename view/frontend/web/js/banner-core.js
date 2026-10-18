@@ -70,6 +70,12 @@
                     preferencesModal: {layout: 'box', equalWeightButtons: true, flipButtons: false}
                 },
                 categories: categoryConfig(),
+                // Consent asks the server whether a "yes" shown there was withdrawn on another device.
+                onModalShow: function (event) {
+                    if (event && event.modalName === 'preferencesModal' && typeof window.CustomEvent === 'function') {
+                        window.dispatchEvent(new window.CustomEvent('ck-consent:preferences'));
+                    }
+                },
                 language: {
                     default: 'shop',
                     translations: {
