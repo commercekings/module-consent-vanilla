@@ -54,6 +54,13 @@ their own. You are responsible for your store's privacy: what you collect, the w
 and whether your setup meets the laws that apply to you (e.g. GDPR, ePrivacy, email marketing rules). Get legal advice
 if you are unsure.
 
+## Tested (as of 0.1.0)
+
+- **Automated tests:** 33 unit and 37 JavaScript tests (Luma and Hyvä) (unit and JavaScript tests run on every push); 98.8% line coverage by the unit tests.
+- **End to end on Magento 2.4.9:** in Chrome, the banner's choices on a Luma store are recorded as consents.
+- **Install:** a fresh install of every CommerceKings package from GitHub on an empty Magento database, verified.
+- **Not tested:** the Hyvä banner end to end in a browser (it is covered by the JavaScript tests).
+
 ---
 
 **Need it installed, set up or customized?** **[Get in touch →](https://commercekings.net)**
