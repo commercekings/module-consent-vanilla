@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 - 2026-10-19
 
 - Opening the preferences fires the window event `ck-consent:preferences`, so Consent can switch off a "yes"
   withdrawn with the email link on another device. Only an event: an older Consent ignores it.
