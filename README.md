@@ -42,6 +42,13 @@ Besides the footer link, any element with class `ck-cookie-settings` reopens the
 
 The banner starts no analytics and loads no external content itself; feature modules do that once consent is given.
 
+## Tested (as of 0.1.0)
+
+- **Automated tests:** 33 unit and 37 JavaScript tests (Luma and Hyvä) (unit and JavaScript tests run on every push); 98.8% line coverage by the unit tests.
+- **End to end on Magento 2.4.9:** in Chrome, the banner's choices on a Luma store are recorded as consents.
+- **Install:** a fresh install of every CommerceKings package from GitHub on an empty Magento database, verified.
+- **Not tested:** the Hyvä banner end to end in a browser (it is covered by the JavaScript tests).
+
 ## More
 
 [How it works](docs/how-it-works.md) – the library and its upgrades, the source, the banner, a site `di.xml` example ·
@@ -53,13 +60,6 @@ These modules help you ask for, record and respect your shoppers' choices – th
 their own. You are responsible for your store's privacy: what you collect, the wording you show, your privacy policy
 and whether your setup meets the laws that apply to you (e.g. GDPR, ePrivacy, email marketing rules). Get legal advice
 if you are unsure.
-
-## Tested (as of 0.1.0)
-
-- **Automated tests:** 33 unit and 37 JavaScript tests (Luma and Hyvä) (unit and JavaScript tests run on every push); 98.8% line coverage by the unit tests.
-- **End to end on Magento 2.4.9:** in Chrome, the banner's choices on a Luma store are recorded as consents.
-- **Install:** a fresh install of every CommerceKings package from GitHub on an empty Magento database, verified.
-- **Not tested:** the Hyvä banner end to end in a browser (it is covered by the JavaScript tests).
 
 ---
 
